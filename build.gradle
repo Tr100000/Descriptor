@@ -1,71 +1,88 @@
 plugins {
-	id 'net.fabricmc.fabric-loom' version "${loom_version}"
-	id 'maven-publish'
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
+    id 'com.diffplug.spotless' version '8.+'
+    id 'maven-publish'
 }
 
 version = project.mod_version
 group = project.maven_group
 
 repositories {
-	maven {
-		name = "TerraformersMC Maven"
-		url = "https://maven.terraformersmc.com/releases"
-		content {
-			includeGroup "com.terraformersmc"
-		}
-	}
+    maven {
+        name = "TerraformersMC Maven"
+        url = "https://maven.terraformersmc.com/releases"
+        content {
+            includeGroup "com.terraformersmc"
+        }
+    }
 }
 
 loom {
-	accessWidenerPath = file("src/main/resources/descriptor.classtweaker")
+    accessWidenerPath = file("src/main/resources/descriptor.classtweaker")
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 
 apply from: "https://raw.githubusercontent.com/Tr100000/modding-utils/main/scripts/devlogin.gradle"
 
-processResources {
-	def version = project.version
-	inputs.property "version", version
+spotless {
+    format "misc", {
+        target "*.gradle", "*.properties", ".gitattributes", ".gitignore"
 
-	filesMatching("fabric.mod.json") {
-		expand "version": version
-	}
+        trimTrailingWhitespace()
+        leadingTabsToSpaces(4)
+        endWithNewline()
+    }
+    java {
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        leadingTabsToSpaces(4)
+        endWithNewline()
+    }
+}
+
+processResources {
+    def version = project.version
+    inputs.property "version", version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": version
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 25
+    it.options.release = 25
 }
 
 java {
-	withSourcesJar()
+    withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_25
-	targetCompatibility = JavaVersion.VERSION_25
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {
-	def projectName = project.name
-	inputs.property "projectName", projectName
+    def projectName = project.name
+    inputs.property "projectName", projectName
 
-	from("LICENSE") {
-		rename { "${it}_$projectName"}
-	}
+    from("LICENSE") {
+        rename { "${it}_$projectName"}
+    }
 }
 
 publishing {
-	publications {
-		create("mavenJava", MavenPublication) {
-			from components.java
-		}
-	}
+    publications {
+        create("mavenJava", MavenPublication) {
+            from components.java
+        }
+    }
 
-	repositories {
-	}
+    repositories {
+    }
 }

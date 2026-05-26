@@ -7,11 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Descriptor implements ClientModInitializer {
-	public static final String MODID = "descriptor";
-	public static final Logger LOGGER = LoggerFactory.getLogger("Descriptor");
+    public static final String MODID = "descriptor";
+    public static final Logger LOGGER = LoggerFactory.getLogger("Descriptor");
 
-	@Override
-	public void onInitializeClient() {
-		ClientCommandRegistrationCallback.EVENT.register(DescriptorCommand::register);
-	}
+    @Override
+    public void onInitializeClient() {
+        ClientCommandRegistrationCallback.EVENT.register(DescriptorCommand::register);
+    }
 }

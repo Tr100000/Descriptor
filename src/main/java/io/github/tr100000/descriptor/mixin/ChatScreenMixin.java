@@ -2,6 +2,7 @@ package io.github.tr100000.descriptor.mixin;
 
 import com.google.common.collect.Ordering;
 import io.github.tr100000.descriptor.DescriptorUtil;
+import io.github.tr100000.descriptor.gui.MobEffectTooltipCache;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.Screen;
@@ -11,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -22,6 +24,14 @@ public abstract class ChatScreenMixin extends Screen {
     protected ChatScreenMixin(Component title) {
         super(title);
         throw new AssertionError();
+    }
+
+    @Unique
+    private MobEffectTooltipCache tooltipCache;
+
+    @Inject(method = "<init>(Ljava/lang/String;ZZ)V", at = @At("TAIL"))
+    private void init(String initial, boolean isDraft, boolean closeOnSubmit, CallbackInfo ci) {
+        tooltipCache = new MobEffectTooltipCache();
     }
 
     @Inject(method = "extractRenderState", at = @At("TAIL"))
@@ -50,7 +60,7 @@ public abstract class ChatScreenMixin extends Screen {
                 if (mouseX >= x && mouseX < x + 24 && mouseY >= y && mouseY < y + 24) {
                     String descriptionKey = DescriptorUtil.getMobEffectDescriptionKey(effect);
                     if (I18n.exists(descriptionKey)) {
-                        graphics.setTooltipForNextFrame(Component.translatable(descriptionKey), mouseX, mouseY);
+                        DescriptorUtil.extractMobEffectTooltip(graphics, tooltipCache, effect, mouseX, mouseY);
                     }
                 }
             }

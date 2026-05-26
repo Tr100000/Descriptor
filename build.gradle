@@ -1,7 +1,8 @@
 plugins {
     id 'net.fabricmc.fabric-loom' version "${loom_version}"
     id 'com.diffplug.spotless' version '8.+'
-    id 'maven-publish'
+	id 'com.modrinth.minotaur' version '2.+'
+	id 'maven-publish'
 }
 
 version = project.mod_version
@@ -76,13 +77,32 @@ jar {
     }
 }
 
+
+modrinth {
+	projectId = "codec2schema"
+	versionNumber = project.version
+	versionName = project.version
+	uploadFile = jar
+	additionalFiles = [sourcesJar]
+	changelog = rootProject.file("CHANGELOG.md").text
+	syncBodyFrom = rootProject.file("README.md").text
+
+	dependencies {
+		required.project "fabric-api"
+	}
+
+	gameVersions.add(project.minecraft_version)
+	if (project.modrinth_extra_minecraft_versions) {
+		project.modrinth_extra_minecraft_versions.split(",").each { gameVersions.add(it.trim()) }
+	}
+}
+
+tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
+
 publishing {
     publications {
         create("mavenJava", MavenPublication) {
             from components.java
         }
-    }
-
-    repositories {
     }
 }

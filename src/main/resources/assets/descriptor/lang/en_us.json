@@ -1,4 +1,6 @@
 {
+  "command.descriptor.check.mob_effect.all_present": "All mob effects have descriptions",
+  "command.descriptor.check.mob_effect.missing": "Missing description for %s",
   "effect.minecraft.absorption.desc": "Grants you temporary additional yellow hearts, allowing you to take more hits.",
   "effect.minecraft.bad_omen.desc": "It's almost as if something bad might happen, maybe in a village, or perhaps a trial chamber?",
   "effect.minecraft.blindness.desc": "Impairs your vision and prevents sprinting.",

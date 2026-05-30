@@ -6,7 +6,6 @@ import io.github.tr100000.descriptor.gui.MobEffectTooltipCache;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
@@ -46,7 +45,7 @@ public abstract class ChatScreenMixin extends Screen {
                 Holder<MobEffect> effect = instance.getEffect();
 
                 int x = graphics.guiWidth();
-                int y = 1;
+                int y = minecraft.isDemo() ? 16 : 1;
 
                 if (effect.value().isBeneficial()) {
                     beneficialCount++;
@@ -58,10 +57,7 @@ public abstract class ChatScreenMixin extends Screen {
                 }
 
                 if (mouseX >= x && mouseX < x + 24 && mouseY >= y && mouseY < y + 24) {
-                    String descriptionKey = DescriptorUtil.getMobEffectDescriptionKey(effect);
-                    if (I18n.exists(descriptionKey)) {
-                        DescriptorUtil.extractMobEffectTooltip(graphics, tooltipCache, effect, mouseX, mouseY);
-                    }
+                    DescriptorUtil.extractMobEffectTooltip(graphics, tooltipCache, effect, mouseX, mouseY);
                 }
             }
         }

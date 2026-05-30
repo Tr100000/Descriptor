@@ -30,13 +30,13 @@ public final class DescriptorCommand {
         int missingCount = 0;
         for (Identifier key : BuiltInRegistries.MOB_EFFECT.keySet()) {
             if (!I18n.exists(DescriptorUtil.getMobEffectDescriptionKey(key))) {
-                context.getSource().sendFeedback(Component.literal(String.format("Missing description for %s", key)));
+                context.getSource().sendFeedback(Component.translatable("command.descriptor.check.mob_effect.missing", key));
                 missingCount++;
             }
         }
 
         if (missingCount == 0)
-            context.getSource().sendFeedback(Component.literal("All descriptions are present."));
+            context.getSource().sendFeedback(Component.translatable("command.descriptor.check.mob_effect.all_present"));
 
         return missingCount;
     }

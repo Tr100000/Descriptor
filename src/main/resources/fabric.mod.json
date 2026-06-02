@@ -16,9 +16,8 @@
 	"icon": "assets/descriptor/icon.png",
 	"environment": "client",
 	"entrypoints": {
-		"client": [
-      "io.github.tr100000.descriptor.Descriptor"
-		]
+		"client": ["io.github.tr100000.descriptor.Descriptor"],
+		"modmenu": ["io.github.tr100000.descriptor.integration.DescriptorModMenuPlugin"]
 	},
 	"mixins": [
 		{
@@ -32,5 +31,9 @@
 		"minecraft": "~26.1",
 		"java": ">=25",
 		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*",
+		"yet_another_config_lib_v3": "*"
 	}
 }

@@ -2,6 +2,7 @@ package io.github.tr100000.descriptor.mixin;
 
 import com.google.common.collect.Ordering;
 import io.github.tr100000.descriptor.DescriptorUtil;
+import io.github.tr100000.descriptor.config.DescriptorConfig;
 import io.github.tr100000.descriptor.gui.MobEffectTooltipCache;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.ChatScreen;
@@ -35,6 +36,9 @@ public abstract class ChatScreenMixin extends Screen {
 
     @Inject(method = "extractRenderState", at = @At("TAIL"))
     private void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a, CallbackInfo ci) {
+        if (!DescriptorConfig.check(c -> c.mobEffects.showGuiTooltips.getValue()))
+            return;
+
         assert minecraft.player != null;
         Collection<MobEffectInstance> activeEffects = minecraft.player.getActiveEffects();
         if (!activeEffects.isEmpty() && !minecraft.options.hideGui) {

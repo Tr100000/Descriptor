@@ -12,6 +12,7 @@ import io.github.tr100000.descriptor.config.option.AbstractOption;
 import io.github.tr100000.descriptor.config.option.impl.BooleanOption;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 
 import static io.github.tr100000.descriptor.config.DescriptorConfig.INSTANCE;
 import static io.github.tr100000.descriptor.config.DescriptorConfig.configTranslated;
@@ -30,16 +31,19 @@ public final class DescriptorYaclConfig {
                                 .name(configTranslated("mob_effects"))
                                 .option(createOption(INSTANCE.mobEffects.showItemTooltips)
                                         .description(OptionDescription.createBuilder()
+                                                .webpImage(image("mob_effect/example_item_tooltip.webp"))
                                                 .text(configTranslatedDesc("mob_effects.show_item_tooltips"))
                                                 .build())
                                         .build())
                                 .option(createOption(INSTANCE.mobEffects.showEffectsInInventoryTooltips)
                                         .description(OptionDescription.createBuilder()
+                                                .webpImage(image("mob_effect/example_effects_in_inventory_tooltip.webp"))
                                                 .text(configTranslatedDesc("mob_effects.show_effects_in_inventory_tooltips"))
                                                 .build())
                                         .build())
                                 .option(createOption(INSTANCE.mobEffects.showGuiTooltips)
                                         .description(OptionDescription.createBuilder()
+                                                .webpImage(image("mob_effect/example_gui_tooltip.webp"))
                                                 .text(configTranslatedDesc("mob_effects.show_gui_tooltips"))
                                                 .build())
                                         .build())
@@ -52,6 +56,10 @@ public final class DescriptorYaclConfig {
 
     private static Component configTranslatedDesc(String key) {
         return Component.translatable(String.format("config.%s.%s.desc", Descriptor.MODID, key));
+    }
+
+    private static Identifier image(String path) {
+        return Descriptor.id("textures/images/" + path);
     }
 
     private static Option.Builder<?> createOption(AbstractOption<?> configOption) {

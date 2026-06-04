@@ -14,6 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.List;
 
@@ -40,11 +41,11 @@ public final class DescriptorUtil {
         return mobEffectId.toLanguageKey("effect", "desc");
     }
 
-    public static void extractMobEffectTooltip(GuiGraphicsExtractor graphics, MobEffectTooltipCache cache, Holder<MobEffect> effect, int x, int y) {
+    public static void extractMobEffectTooltip(GuiGraphicsExtractor graphics, MobEffectTooltipCache cache, MobEffectInstance effect, int x, int y) {
         extractMobEffectTooltip(graphics, cache.getOrCreate(effect), x, y);
     }
 
-    public static void extractMobEffectTooltip(GuiGraphicsExtractor graphics, Holder<MobEffect> effect, int x, int y) {
+    public static void extractMobEffectTooltip(GuiGraphicsExtractor graphics, MobEffectInstance effect, int x, int y) {
         extractMobEffectTooltip(graphics, new MobEffectTooltipComponent(effect), x, y);
     }
 

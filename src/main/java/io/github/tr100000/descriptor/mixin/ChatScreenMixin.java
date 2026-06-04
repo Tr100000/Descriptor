@@ -61,7 +61,7 @@ public abstract class ChatScreenMixin extends Screen {
                 }
 
                 if (mouseX >= x && mouseX < x + 24 && mouseY >= y && mouseY < y + 24) {
-                    DescriptorUtil.extractMobEffectTooltip(graphics, tooltipCache, effect, mouseX, mouseY);
+                    DescriptorUtil.extractMobEffectTooltip(graphics, tooltipCache, instance, mouseX, mouseY);
                 }
             }
         }

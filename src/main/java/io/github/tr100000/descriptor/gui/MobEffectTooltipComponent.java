@@ -6,11 +6,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 
 public class MobEffectTooltipComponent implements ClientTooltipComponent {
     private static final Minecraft minecraft = Minecraft.getInstance();
@@ -18,12 +17,12 @@ public class MobEffectTooltipComponent implements ClientTooltipComponent {
     private final Component descriptionComponent;
     private final Component idComponent;
 
-    public MobEffectTooltipComponent(Holder<MobEffect> effect) {
-        Identifier id = BuiltInRegistries.MOB_EFFECT.getKey(effect.value());
+    public MobEffectTooltipComponent(MobEffectInstance effectInstance) {
+        Identifier id = BuiltInRegistries.MOB_EFFECT.getKey(effectInstance.getEffect().value());
         assert id != null;
 
         nameComponent = Component.translatable(id.toLanguageKey("effect"));
-        descriptionComponent = DescriptorUtil.getMobEffectDescription(effect).withStyle(ChatFormatting.GRAY);
+        descriptionComponent = DescriptorUtil.getMobEffectDescription(effectInstance.getEffect()).withStyle(ChatFormatting.GRAY);
         idComponent = Component.literal(id.toString()).withStyle(ChatFormatting.DARK_GRAY);
     }
 

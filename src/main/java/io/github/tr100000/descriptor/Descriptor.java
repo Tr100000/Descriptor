@@ -7,6 +7,7 @@ import io.github.tr100000.descriptor.config.DescriptorConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,5 +25,9 @@ public class Descriptor implements ClientModInitializer {
         DescriptorConfig.load();
 
         ClientCommandRegistrationCallback.EVENT.register(DescriptorCommand::register);
+    }
+
+    public static Identifier id(String path) {
+        return Identifier.fromNamespaceAndPath(MODID, path);
     }
 }

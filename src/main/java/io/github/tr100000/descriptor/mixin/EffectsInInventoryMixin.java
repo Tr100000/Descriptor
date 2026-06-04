@@ -32,7 +32,7 @@ public abstract class EffectsInInventoryMixin {
             return;
 
         if (mouseX >= x0 && mouseX < x0 + textureWidth && mouseY >= y0 && mouseY < y0 + 32) {
-            DescriptorUtil.extractMobEffectTooltip(graphics, tooltipCache, effect.getEffect(), mouseX, mouseY);
+            DescriptorUtil.extractMobEffectTooltip(graphics, tooltipCache, effect, mouseX, mouseY);
         }
     }
 }

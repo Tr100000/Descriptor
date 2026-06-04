@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import io.github.tr100000.descriptor.DescriptorUtil;
 import io.github.tr100000.descriptor.config.DescriptorConfig;
 import io.github.tr100000.descriptor.gui.MobEffectTooltipCache;
+import io.github.tr100000.descriptor.gui.MobEffectTooltipSettings;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.EffectsInInventory;
@@ -23,7 +24,8 @@ public abstract class EffectsInInventoryMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void init(AbstractContainerScreen<?> screen, CallbackInfo ci) {
-        tooltipCache = new MobEffectTooltipCache();
+        boolean showExtraDetails = DescriptorConfig.INSTANCE.mobEffects.extraDetailsInEffectsInInventoryTooltip.getValue();
+        tooltipCache = new MobEffectTooltipCache(new MobEffectTooltipSettings(showExtraDetails, showExtraDetails));
     }
 
     @Inject(method = "extractEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blitSprite(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V", shift = At.Shift.AFTER))

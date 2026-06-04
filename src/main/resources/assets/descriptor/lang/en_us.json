@@ -1,8 +1,13 @@
 {
   "command.descriptor.check.mob_effect.all_present": "All mob effects have descriptions",
   "command.descriptor.check.mob_effect.missing": "Missing description for %s",
+  "command.descriptor.config.reload": "Finished reloading config",
   "config.descriptor.main": "Descriptor Config",
   "config.descriptor.mob_effects": "Mob Effects",
+  "config.descriptor.mob_effects.extra_details_in_effects_in_inventory_tooltip": "Show Extra Details in Inventory Effects Tooltip",
+  "config.descriptor.mob_effects.extra_details_in_effects_in_inventory_tooltip.desc": "Show effect amplifier and remaining duration in tooltips shown in the inventory effects.",
+  "config.descriptor.mob_effects.extra_details_in_gui_tooltip": "Show Extra Details in HUD Tooltip",
+  "config.descriptor.mob_effects.extra_details_in_gui_tooltip.desc": "Show effect amplifier and remaining duration in HUD tooltips.\nThis information is normally not available in the HUD at all.",
   "config.descriptor.mob_effects.show_effects_in_inventory_tooltips": "Show Tooltips in Inventory",
   "config.descriptor.mob_effects.show_effects_in_inventory_tooltips.desc": "Shows effect description tooltips when hovering over effects shown to the right of your inventory.",
   "config.descriptor.mob_effects.show_gui_tooltips": "Show Tooltips in HUD",

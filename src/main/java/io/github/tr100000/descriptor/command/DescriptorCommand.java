@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import io.github.tr100000.descriptor.Descriptor;
 import io.github.tr100000.descriptor.DescriptorUtil;
+import io.github.tr100000.descriptor.config.DescriptorConfig;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.commands.CommandBuildContext;
@@ -23,6 +24,11 @@ public final class DescriptorCommand {
                                 .executes(DescriptorCommand::checkMobEffectTranslations)
                         )
                 )
+                .then(literal("config")
+                        .then(literal("reload")
+                                .executes(DescriptorCommand::reloadConfig)
+                        )
+                )
         );
     }
 
@@ -39,5 +45,11 @@ public final class DescriptorCommand {
             context.getSource().sendFeedback(Component.translatable("command.descriptor.check.mob_effect.all_present"));
 
         return missingCount;
+    }
+
+    private static int reloadConfig(CommandContext<FabricClientCommandSource> context) {
+        DescriptorConfig.load();
+        context.getSource().sendFeedback(Component.translatable("command.descriptor.config.reload"));
+        return 0;
     }
 }

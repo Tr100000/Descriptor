@@ -1,7 +1,6 @@
 package io.github.tr100000.descriptor;
 
 import io.github.tr100000.descriptor.gui.MobEffectTooltipCache;
-import io.github.tr100000.descriptor.gui.MobEffectTooltipComponent;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -41,15 +40,11 @@ public final class DescriptorUtil {
         return mobEffectId.toLanguageKey("effect", "desc");
     }
 
-    public static void extractMobEffectTooltip(GuiGraphicsExtractor graphics, MobEffectTooltipCache cache, MobEffectInstance effect, int x, int y) {
-        extractMobEffectTooltip(graphics, cache.getOrCreate(effect), x, y);
+    public static void extractMobEffectTooltip(GuiGraphicsExtractor graphics, MobEffectTooltipCache cache, MobEffectInstance instance, int x, int y) {
+        extractMobEffectTooltip(graphics, cache.getOrCreate(instance), x, y);
     }
 
-    public static void extractMobEffectTooltip(GuiGraphicsExtractor graphics, MobEffectInstance effect, int x, int y) {
-        extractMobEffectTooltip(graphics, new MobEffectTooltipComponent(effect), x, y);
-    }
-
-    public static void extractMobEffectTooltip(GuiGraphicsExtractor graphics, ClientTooltipComponent tooltipComponent, int x, int y) {
+    private static void extractMobEffectTooltip(GuiGraphicsExtractor graphics, ClientTooltipComponent tooltipComponent, int x, int y) {
         graphics.setTooltipForNextFrameInternal(Minecraft.getInstance().font, List.of(tooltipComponent), x, y, DefaultTooltipPositioner.INSTANCE, null, false);
     }
 }

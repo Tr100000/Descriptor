@@ -37,6 +37,9 @@ public class DescriptorConfig extends GroupOption<DescriptorConfig> {
         public BooleanOption showEffectsInInventoryTooltips = add(new BooleanOption(true, "show_effects_in_inventory_tooltips", configTranslated("mob_effects.show_effects_in_inventory_tooltips")));
         public BooleanOption showGuiTooltips = add(new BooleanOption(true, "show_gui_tooltips", configTranslated("mob_effects.show_gui_tooltips")));
 
+        public BooleanOption extraDetailsInGuiTooltip = add(new BooleanOption(true, "extra_details_in_gui_tooltip", configTranslated("mob_effects.extra_details_in_gui_tooltip")));
+        public BooleanOption extraDetailsInEffectsInInventoryTooltip = add(new BooleanOption(false, "extra_details_in_effects_in_inventory_tooltip", configTranslated("mob_effects.extra_details_in_effects_in_inventory_tooltip")));
+
         @Override
         public String getName() {
             return "mob_effects";

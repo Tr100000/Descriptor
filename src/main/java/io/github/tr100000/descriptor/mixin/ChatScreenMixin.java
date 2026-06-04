@@ -4,6 +4,7 @@ import com.google.common.collect.Ordering;
 import io.github.tr100000.descriptor.DescriptorUtil;
 import io.github.tr100000.descriptor.config.DescriptorConfig;
 import io.github.tr100000.descriptor.gui.MobEffectTooltipCache;
+import io.github.tr100000.descriptor.gui.MobEffectTooltipSettings;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.Screen;
@@ -31,7 +32,8 @@ public abstract class ChatScreenMixin extends Screen {
 
     @Inject(method = "<init>(Ljava/lang/String;ZZ)V", at = @At("TAIL"))
     private void init(String initial, boolean isDraft, boolean closeOnSubmit, CallbackInfo ci) {
-        tooltipCache = new MobEffectTooltipCache();
+        boolean showExtraDetails = DescriptorConfig.INSTANCE.mobEffects.extraDetailsInGuiTooltip.getValue();
+        tooltipCache = new MobEffectTooltipCache(new MobEffectTooltipSettings(showExtraDetails, showExtraDetails));
     }
 
     @Inject(method = "extractRenderState", at = @At("TAIL"))
@@ -54,7 +56,8 @@ public abstract class ChatScreenMixin extends Screen {
                 if (effect.value().isBeneficial()) {
                     beneficialCount++;
                     x -= 25 * beneficialCount;
-                } else {
+                }
+                else {
                     harmfulCount++;
                     x -= 25 * harmfulCount;
                     y += 26;

@@ -1,7 +1,10 @@
 {
-  "command.descriptor.check.mob_effect.all_present": "All mob effects have descriptions",
-  "command.descriptor.check.mob_effect.missing": "Missing description for %s",
   "command.descriptor.config.reload": "Finished reloading config",
+  "command.descriptor.mob_effect.validate.all_ok": "All mob effects have descriptions",
+  "command.descriptor.mob_effect.validate.error": "Effect %s has %s error(s):",
+  "command.descriptor.mob_effect.validate.error.no_details": "Effect %s has errors",
+  "command.descriptor.mob_effect.handler.error_doesnt_exist": "Effect with id %s doesn't exist",
+  "command.descriptor.mob_effect.handler": "Effect %s uses handler type %s",
   "config.descriptor.main": "Descriptor Config",
   "config.descriptor.mob_effects": "Mob Effects",
   "config.descriptor.mob_effects.extra_details_in_effects_in_inventory_tooltip": "Show Extra Details in Inventory Effects Tooltip",
@@ -55,5 +58,6 @@
   "effect.minecraft.weaving.desc": "Allows you to move more quickly through cobwebs.",
   "effect.minecraft.wind_charged.desc": "Causes a burst of wind when dying.",
   "effect.minecraft.wither.desc": "Drains your health over time.",
-  "effect.missing_desc": "No description available"
+  "effect_handler.descriptor.default.error": "Missing description",
+  "effect_handler.descriptor.default.missing_desc": "No description available"
 }

@@ -3,7 +3,7 @@ package io.github.tr100000.descriptor.mixin;
 import com.llamalad7.mixinextras.sugar.Local;
 import io.github.tr100000.descriptor.DescriptorUtil;
 import io.github.tr100000.descriptor.config.DescriptorConfig;
-import io.github.tr100000.descriptor.gui.MobEffectTooltipCache;
+import io.github.tr100000.descriptor.gui.MobEffectTooltipFactory;
 import io.github.tr100000.descriptor.gui.MobEffectTooltipSettings;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -20,12 +20,12 @@ import java.util.Collection;
 @Mixin(EffectsInInventory.class)
 public abstract class EffectsInInventoryMixin {
     @Unique
-    private MobEffectTooltipCache tooltipCache;
+    private MobEffectTooltipFactory tooltipCache;
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void init(AbstractContainerScreen<?> screen, CallbackInfo ci) {
         boolean showExtraDetails = DescriptorConfig.INSTANCE.mobEffects.extraDetailsInEffectsInInventoryTooltip.getValue();
-        tooltipCache = new MobEffectTooltipCache(new MobEffectTooltipSettings(showExtraDetails, showExtraDetails));
+        tooltipCache = new MobEffectTooltipFactory(new MobEffectTooltipSettings(showExtraDetails, showExtraDetails));
     }
 
     @Inject(method = "extractEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blitSprite(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V", shift = At.Shift.AFTER))

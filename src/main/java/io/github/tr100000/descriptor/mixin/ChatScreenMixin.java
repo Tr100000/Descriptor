@@ -3,7 +3,7 @@ package io.github.tr100000.descriptor.mixin;
 import com.google.common.collect.Ordering;
 import io.github.tr100000.descriptor.DescriptorUtil;
 import io.github.tr100000.descriptor.config.DescriptorConfig;
-import io.github.tr100000.descriptor.gui.MobEffectTooltipCache;
+import io.github.tr100000.descriptor.gui.MobEffectTooltipFactory;
 import io.github.tr100000.descriptor.gui.MobEffectTooltipSettings;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.ChatScreen;
@@ -28,12 +28,12 @@ public abstract class ChatScreenMixin extends Screen {
     }
 
     @Unique
-    private MobEffectTooltipCache tooltipCache;
+    private MobEffectTooltipFactory tooltipCache;
 
     @Inject(method = "<init>(Ljava/lang/String;ZZ)V", at = @At("TAIL"))
     private void init(String initial, boolean isDraft, boolean closeOnSubmit, CallbackInfo ci) {
         boolean showExtraDetails = DescriptorConfig.INSTANCE.mobEffects.extraDetailsInGuiTooltip.getValue();
-        tooltipCache = new MobEffectTooltipCache(new MobEffectTooltipSettings(showExtraDetails, showExtraDetails));
+        tooltipCache = new MobEffectTooltipFactory(new MobEffectTooltipSettings(showExtraDetails, showExtraDetails));
     }
 
     @Inject(method = "extractRenderState", at = @At("TAIL"))

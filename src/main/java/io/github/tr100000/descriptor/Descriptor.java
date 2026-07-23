@@ -4,10 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.github.tr100000.descriptor.command.DescriptorCommand;
 import io.github.tr100000.descriptor.config.DescriptorConfig;
+import io.github.tr100000.descriptor.impl.DefaultMobEffectHandler;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.PackType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +26,10 @@ public class Descriptor implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         DescriptorConfig.load();
+
+        ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloadListener(MobEffectHandlers.ID, MobEffectHandlers.INSTANCE);
+
+        MobEffectHandlers.register(id("default"), DefaultMobEffectHandler.TYPE);
 
         ClientCommandRegistrationCallback.EVENT.register(DescriptorCommand::register);
     }

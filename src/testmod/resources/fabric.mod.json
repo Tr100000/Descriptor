@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "descriptor-testmod",
+  "version": "${version}",
+  "name": "Descriptor Testmod",
+  "license": "LGPL-3.0-or-later",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["io.github.tr100000.descriptor.testmod.DescriptorTestmod"]
+  },
+  "depends": {
+    "descriptor": "*"
+  }
+}

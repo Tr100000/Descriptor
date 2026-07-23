@@ -17,7 +17,8 @@
 	"environment": "client",
 	"entrypoints": {
 		"client": ["io.github.tr100000.descriptor.Descriptor"],
-		"modmenu": ["io.github.tr100000.descriptor.integration.DescriptorModMenuPlugin"]
+		"modmenu": ["io.github.tr100000.descriptor.integration.DescriptorModMenuPlugin"],
+		"codec2schema:client": ["io.github.tr100000.descriptor.integration.DescriptorSchemaGeneration"]
 	},
 	"mixins": [
 		{
@@ -27,10 +28,10 @@
 	],
 	"accessWidener": "descriptor.classtweaker",
 	"depends": {
-		"fabricloader": ">=0.19.2",
+		"fabricloader": ">=0.19",
 		"minecraft": "~26.1",
 		"java": ">=25",
-		"fabric-api": "*"
+		"fabric-api": ">=0.152"
 	},
 	"suggests": {
 		"modmenu": "*",

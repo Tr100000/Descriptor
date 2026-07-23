@@ -20,8 +20,8 @@ public class DescriptorConfig extends GroupOption<DescriptorConfig> {
 
     private DescriptorConfig() {}
 
-    public BooleanOption modEnabled = add(new BooleanOption(true, "mod_enabled", configTranslated("mod_enabled")));
-    public MobEffectsSettings mobEffects = add(new MobEffectsSettings());
+    public final BooleanOption modEnabled = add(new BooleanOption(true, "mod_enabled", configTranslated("mod_enabled")));
+    public final MobEffectsSettings mobEffects = add(new MobEffectsSettings());
 
     public static boolean check(Predicate<DescriptorConfig> predicate) {
         return INSTANCE.modEnabled.getValue() && predicate.test(INSTANCE);
@@ -33,12 +33,12 @@ public class DescriptorConfig extends GroupOption<DescriptorConfig> {
     }
 
     public static class MobEffectsSettings extends GroupOption<MobEffectsSettings> {
-        public BooleanOption showItemTooltips = add(new BooleanOption(true, "show_item_tooltips", configTranslated("mob_effects.show_item_tooltips")));
-        public BooleanOption showEffectsInInventoryTooltips = add(new BooleanOption(true, "show_effects_in_inventory_tooltips", configTranslated("mob_effects.show_effects_in_inventory_tooltips")));
-        public BooleanOption showGuiTooltips = add(new BooleanOption(true, "show_gui_tooltips", configTranslated("mob_effects.show_gui_tooltips")));
+        public final BooleanOption showItemTooltips = add(new BooleanOption(true, "show_item_tooltips", configTranslated("mob_effects.show_item_tooltips")));
+        public final BooleanOption showEffectsInInventoryTooltips = add(new BooleanOption(true, "show_effects_in_inventory_tooltips", configTranslated("mob_effects.show_effects_in_inventory_tooltips")));
+        public final BooleanOption showGuiTooltips = add(new BooleanOption(true, "show_gui_tooltips", configTranslated("mob_effects.show_gui_tooltips")));
 
-        public BooleanOption extraDetailsInGuiTooltip = add(new BooleanOption(true, "extra_details_in_gui_tooltip", configTranslated("mob_effects.extra_details_in_gui_tooltip")));
-        public BooleanOption extraDetailsInEffectsInInventoryTooltip = add(new BooleanOption(false, "extra_details_in_effects_in_inventory_tooltip", configTranslated("mob_effects.extra_details_in_effects_in_inventory_tooltip")));
+        public final BooleanOption extraDetailsInGuiTooltip = add(new BooleanOption(true, "extra_details_in_gui_tooltip", configTranslated("mob_effects.extra_details_in_gui_tooltip")));
+        public final BooleanOption extraDetailsInEffectsInInventoryTooltip = add(new BooleanOption(false, "extra_details_in_effects_in_inventory_tooltip", configTranslated("mob_effects.extra_details_in_effects_in_inventory_tooltip")));
 
         @Override
         public String getName() {

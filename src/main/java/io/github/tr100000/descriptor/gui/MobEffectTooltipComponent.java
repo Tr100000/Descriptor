@@ -34,7 +34,7 @@ public class MobEffectTooltipComponent implements ClientTooltipComponent {
         assert id != null;
 
         nameComponent = Component.translatable(id.toLanguageKey("effect"));
-        descriptionComponent = DescriptorUtil.getMobEffectDescription(instance.getEffect()).withStyle(ChatFormatting.GRAY);
+        descriptionComponent = DescriptorUtil.getMobEffectDescription(instance);
         idComponent = Component.literal(id.toString()).withStyle(ChatFormatting.DARK_GRAY);
 
         if (settings.showAmplifier() && instance.getAmplifier() >= 1 && instance.getAmplifier() <= 9) {

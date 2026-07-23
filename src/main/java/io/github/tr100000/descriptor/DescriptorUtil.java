@@ -1,18 +1,11 @@
 package io.github.tr100000.descriptor;
 
-import io.github.tr100000.descriptor.gui.MobEffectTooltipCache;
-import net.minecraft.ChatFormatting;
+import io.github.tr100000.descriptor.gui.MobEffectTooltipFactory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
-import net.minecraft.client.resources.language.I18n;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.List;
@@ -20,28 +13,12 @@ import java.util.List;
 public final class DescriptorUtil {
     private DescriptorUtil() {}
 
-    public static MutableComponent getMobEffectDescription(Holder<MobEffect> mobEffect) {
-        String key = getMobEffectDescriptionKey(mobEffect);
-        if (I18n.exists(key)) {
-            return Component.translatable(getMobEffectDescriptionKey(mobEffect)).withStyle(ChatFormatting.GRAY);
-        }
-        else {
-            return Component.translatable("effect.missing_desc").withStyle(ChatFormatting.GRAY);
-        }
+    public static MutableComponent getMobEffectDescription(MobEffectInstance instance) {
+        return MobEffectHandlers.INSTANCE.get(instance.getEffect()).getDescription(instance);
     }
 
-    public static String getMobEffectDescriptionKey(Holder<MobEffect> mobEffect) {
-        Identifier effectId = BuiltInRegistries.MOB_EFFECT.getKey(mobEffect.value());
-        assert effectId != null;
-        return getMobEffectDescriptionKey(effectId);
-    }
-
-    public static String getMobEffectDescriptionKey(Identifier mobEffectId) {
-        return mobEffectId.toLanguageKey("effect", "desc");
-    }
-
-    public static void extractMobEffectTooltip(GuiGraphicsExtractor graphics, MobEffectTooltipCache cache, MobEffectInstance instance, int x, int y) {
-        extractMobEffectTooltip(graphics, cache.getOrCreate(instance), x, y);
+    public static void extractMobEffectTooltip(GuiGraphicsExtractor graphics, MobEffectTooltipFactory cache, MobEffectInstance instance, int x, int y) {
+        extractMobEffectTooltip(graphics, cache.create(instance), x, y);
     }
 
     private static void extractMobEffectTooltip(GuiGraphicsExtractor graphics, ClientTooltipComponent tooltipComponent, int x, int y) {

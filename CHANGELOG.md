@@ -1,5 +1,3 @@
 ### Added
-- The mod is now configurable!
-  - Install ModMenu and YACL to edit the config in-game
-- Now shows effect amplifier and remaining duration in HUD tooltips
-- Added an option to show effect amplifier and remaining duration in tooltips show in the inventory effects
+- Mob effects can now have custom handlers attached to them
+  - This is for more advanced effects that may change their function depending on duration and amplifier.

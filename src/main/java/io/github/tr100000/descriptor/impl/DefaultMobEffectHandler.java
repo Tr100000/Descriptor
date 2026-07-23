@@ -4,9 +4,9 @@ import com.mojang.serialization.MapCodec;
 import io.github.tr100000.descriptor.api.MobEffectHandler;
 import io.github.tr100000.descriptor.api.MobEffectHandlerType;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffect;
@@ -29,7 +29,7 @@ public final class DefaultMobEffectHandler implements MobEffectHandler {
     @Override
     public MutableComponent getDescription(MobEffectInstance instance) {
         String key = getDescriptionKey(instance.getEffect());
-        if (I18n.exists(key)) {
+        if (Language.getInstance().has(key)) {
             return Component.translatable(key).withStyle(ChatFormatting.GRAY);
         }
         else {
@@ -39,7 +39,7 @@ public final class DefaultMobEffectHandler implements MobEffectHandler {
 
     @Override
     public boolean validate(Holder<MobEffect> effect, Consumer<Component> errorConsumer) {
-        if (I18n.exists(getDescriptionKey(effect))) {
+        if (Language.getInstance().has(getDescriptionKey(effect))) {
             return true;
         }
         else {

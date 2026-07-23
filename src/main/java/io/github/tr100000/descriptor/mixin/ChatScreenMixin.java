@@ -43,7 +43,7 @@ public abstract class ChatScreenMixin extends Screen {
 
         assert minecraft.player != null;
         Collection<MobEffectInstance> activeEffects = minecraft.player.getActiveEffects();
-        if (!activeEffects.isEmpty() && !minecraft.options.hideGui) {
+        if (!activeEffects.isEmpty() && !minecraft.gui.hud.isHidden()) {
             int harmfulCount = 0;
             int beneficialCount = 0;
 

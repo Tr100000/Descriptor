@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.0.4+26.2]
+
+**Ported to 26.2**
+
+## [0.0.4+26.1.2]
+
+### Added
+- Mob effects can now have custom handlers attached to them
+  - This is for more advanced effects that may change their function depending on duration and amplifier.
+
 ## [0.0.3+26.1.2]
 
 ### Added

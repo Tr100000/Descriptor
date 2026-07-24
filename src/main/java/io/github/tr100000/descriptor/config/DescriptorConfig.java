@@ -22,6 +22,7 @@ public class DescriptorConfig extends GroupOption<DescriptorConfig> {
 
     public final BooleanOption modEnabled = add(new BooleanOption(true, "mod_enabled", configTranslated("mod_enabled")));
     public final MobEffectsSettings mobEffects = add(new MobEffectsSettings());
+    public final MusicDiscsSettings musicDiscs = add(new MusicDiscsSettings());
 
     public static boolean check(Predicate<DescriptorConfig> predicate) {
         return INSTANCE.modEnabled.getValue() && predicate.test(INSTANCE);
@@ -43,6 +44,16 @@ public class DescriptorConfig extends GroupOption<DescriptorConfig> {
         @Override
         public String getName() {
             return "mob_effects";
+        }
+    }
+
+    public static class MusicDiscsSettings extends GroupOption<MusicDiscsSettings> {
+        public final BooleanOption showLengthTooltip = add(new BooleanOption(true, "show_length_tooltip", configTranslated("music_discs.show_length_tooltip")));
+        public final BooleanOption showRedstoneOutputTooltip = add(new BooleanOption(true, "show_redstone_output_tooltip", configTranslated("music_discs.show_redstone_output_tooltip")));
+
+        @Override
+        public String getName() {
+            return "music_discs";
         }
     }
 

@@ -3,6 +3,7 @@
   "package": "io.github.tr100000.descriptor.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "JukeboxPlayableMixin",
     "PotionContentsMixin"
   ],
   "client": [

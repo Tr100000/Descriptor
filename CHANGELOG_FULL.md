@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.5+26.2]
+
+### Added
+- Added duration and redstone output tooltips to music discs
+
 ## [0.0.4+26.2]
 
 **Ported to 26.2**

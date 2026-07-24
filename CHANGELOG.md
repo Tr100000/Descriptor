@@ -1,1 +1,2 @@
-**Ported to 26.2**
+### Added
+- Added duration and redstone output tooltips to music discs

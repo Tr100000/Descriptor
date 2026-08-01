@@ -37,6 +37,7 @@ public class DescriptorConfig extends GroupOption<DescriptorConfig> {
         public final BooleanOption showItemTooltips = add(new BooleanOption(true, "show_item_tooltips", configTranslated("mob_effects.show_item_tooltips")));
         public final BooleanOption showEffectsInInventoryTooltips = add(new BooleanOption(true, "show_effects_in_inventory_tooltips", configTranslated("mob_effects.show_effects_in_inventory_tooltips")));
         public final BooleanOption showGuiTooltips = add(new BooleanOption(true, "show_gui_tooltips", configTranslated("mob_effects.show_gui_tooltips")));
+        public final BooleanOption showCommandCompletionTooltips = add(new BooleanOption(true, "show_command_completion_tooltips", configTranslated("mob_effects.show_command_completion_tooltips")));
 
         public final BooleanOption extraDetailsInGuiTooltip = add(new BooleanOption(true, "extra_details_in_gui_tooltip", configTranslated("mob_effects.extra_details_in_gui_tooltip")));
         public final BooleanOption extraDetailsInEffectsInInventoryTooltip = add(new BooleanOption(false, "extra_details_in_effects_in_inventory_tooltip", configTranslated("mob_effects.extra_details_in_effects_in_inventory_tooltip")));

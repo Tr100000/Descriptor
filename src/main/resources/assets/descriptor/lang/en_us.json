@@ -13,6 +13,8 @@
   "config.descriptor.mob_effects.extra_details_in_gui_tooltip.desc": "Show effect amplifier and remaining duration in HUD tooltips.\nThis information is normally not available in the HUD at all.",
   "config.descriptor.mob_effects.show_effects_in_inventory_tooltips": "Show Tooltips in Inventory",
   "config.descriptor.mob_effects.show_effects_in_inventory_tooltips.desc": "Shows effect description tooltips when hovering over effects shown to the right of your inventory.",
+  "config.descriptor.mob_effects.show_command_completion_tooltips": "Enable Command Completion Tooltips",
+  "config.descriptor.mob_effects.show_command_completion_tooltips.desc": "Adds tooltips to /effect command completions.",
   "config.descriptor.mob_effects.show_gui_tooltips": "Show Tooltips in HUD",
   "config.descriptor.mob_effects.show_gui_tooltips.desc": "Shows effect description tooltips when hovering over effects shown in the HUD (in the top-left).",
   "config.descriptor.mob_effects.show_item_tooltips": "Show in Item Tooltips",

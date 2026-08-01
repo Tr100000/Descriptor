@@ -1,4 +1,4 @@
-package io.github.tr100000.descriptor.mixin;
+package io.github.tr100000.descriptor.mixin.music_discs;
 
 import io.github.tr100000.descriptor.config.DescriptorConfig;
 import net.minecraft.core.Holder;

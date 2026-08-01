@@ -1,4 +1,4 @@
-package io.github.tr100000.descriptor.mixin;
+package io.github.tr100000.descriptor.mixin.mob_effects;
 
 import com.google.common.collect.Ordering;
 import io.github.tr100000.descriptor.DescriptorUtil;

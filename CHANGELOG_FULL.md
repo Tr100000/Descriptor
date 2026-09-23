@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.0.6+26.2]
+
+### Added
+- Added mob effect tooltip to /effect command completion text
+- Added a preview tooltip for paintings
+
 ## [0.0.5+26.2]
 
 ### Added

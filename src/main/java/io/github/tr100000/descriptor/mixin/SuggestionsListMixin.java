@@ -19,7 +19,11 @@ public abstract class SuggestionsListMixin {
     @Final
     CommandSuggestions this$0;
 
-    @Inject(method = "extractRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;setTooltipForNextFrame(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;II)V"), cancellable = true)
+    @Inject(
+            method = "extractRenderState",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;setTooltipForNextFrame(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;II)V"),
+            cancellable = true
+    )
     private void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, CallbackInfo ci, @Local Message tooltip) {
         if (tooltip instanceof MessageWithCustomTooltip customTooltip) {
             ci.cancel();

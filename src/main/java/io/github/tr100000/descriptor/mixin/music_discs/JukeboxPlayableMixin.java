@@ -28,12 +28,12 @@ public abstract class JukeboxPlayableMixin {
 
     @Inject(method = "addToTooltip", at = @At("TAIL"))
     private void addToTooltip(Item.TooltipContext context, Consumer<Component> consumer, TooltipFlag flag, DataComponentGetter components, CallbackInfo ci) {
-        if (DescriptorConfig.check(c -> c.musicDiscs.showLengthTooltip.getValue())) {
+        if (DescriptorConfig.check(c -> c.musicDiscs.showLengthTooltip)) {
             Duration duration = Duration.ofSeconds(Mth.ceil(song.value().lengthInSeconds()));
             String durationStr = formatDurationStr(duration);
             consumer.accept(Component.translatable("descriptor.music_disc.length", durationStr).withColor(TextColor.GRAY));
         }
-        if (DescriptorConfig.check(c -> c.musicDiscs.showRedstoneOutputTooltip.getValue())) {
+        if (DescriptorConfig.check(c -> c.musicDiscs.showRedstoneOutputTooltip)) {
             consumer.accept(Component.translatable("descriptor.music_disc.comparator_output", song.value().comparatorOutput()).withColor(TextColor.GRAY));
         }
     }

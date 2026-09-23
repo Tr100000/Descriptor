@@ -5,9 +5,11 @@
   "mixins": [
     "mob_effects.PotionContentsMixin",
     "mob_effects.SharedSuggestionProviderMixin",
-    "music_discs.JukeboxPlayableMixin"
+    "music_discs.JukeboxPlayableMixin",
+    "paintings.HangingEntityItem"
   ],
   "client": [
+    "ClientTooltipComponentMixin",
     "SuggestionsListMixin",
     "mob_effects.ChatScreenMixin",
     "mob_effects.EffectsInInventoryMixin"

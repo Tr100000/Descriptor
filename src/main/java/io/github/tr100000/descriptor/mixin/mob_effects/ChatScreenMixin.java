@@ -38,7 +38,7 @@ public abstract class ChatScreenMixin extends Screen {
 
     @Inject(method = "extractRenderState", at = @At("TAIL"))
     private void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a, CallbackInfo ci) {
-        if (!DescriptorConfig.check(c -> c.mobEffects.showGuiTooltips.getValue()))
+        if (!DescriptorConfig.check(c -> c.mobEffects.showGuiTooltips))
             return;
 
         assert minecraft.player != null;

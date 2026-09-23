@@ -1,2 +1,3 @@
 ### Added
-- Added duration and redstone output tooltips to music discs
+- Added mob effect tooltip to /effect command completion text
+- Added a preview tooltip for paintings

@@ -5,14 +5,20 @@ import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.OptionGroup;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
+import dev.isxander.yacl3.api.controller.ControllerBuilder;
+import dev.isxander.yacl3.api.controller.FloatFieldControllerBuilder;
+import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import io.github.tr100000.descriptor.Descriptor;
 import io.github.tr100000.descriptor.config.DescriptorConfig;
 import io.github.tr100000.descriptor.config.option.AbstractOption;
 import io.github.tr100000.descriptor.config.option.impl.BooleanOption;
+import io.github.tr100000.descriptor.config.option.impl.FloatOption;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+
+import java.util.function.Function;
 
 import static io.github.tr100000.descriptor.config.DescriptorConfig.INSTANCE;
 import static io.github.tr100000.descriptor.config.DescriptorConfig.configTranslated;
@@ -76,6 +82,20 @@ public final class DescriptorYaclConfig {
                                                 .build())
                                         .build())
                                 .build())
+                        .group(OptionGroup.createBuilder()
+                                .name(configTranslated("paintings"))
+                                .option(createOption(INSTANCE.paintings.showPreviewTooltip)
+                                        .description(OptionDescription.createBuilder()
+                                                .text(configTranslatedDesc("paintings.show_preview_tooltip"))
+                                                .build())
+                                        .build())
+                                .option(createOption(INSTANCE.paintings.previewTooltipScale)
+                                        .description(OptionDescription.createBuilder()
+                                                .text(configTranslatedDesc("paintings.preview_tooltip_scale"))
+                                                .build())
+                                        .build())
+                                .build()
+                        )
                         .build())
                 .save(DescriptorConfig::save)
                 .build()
@@ -98,7 +118,23 @@ public final class DescriptorYaclConfig {
                         .binding(booleanOption.getDefaultValue(), booleanOption::getValue, booleanOption::setValue)
                         .controller(TickBoxControllerBuilder::create);
             }
+            case FloatOption floatOption -> {
+                return Option.<Float>createBuilder()
+                        .name(floatOption.getTitle())
+                        .binding(floatOption.getDefaultValue(), floatOption::getValue, floatOption::setValue)
+                        .controller(getFloatController(floatOption));
+            }
             default -> throw new IllegalArgumentException("Unexpected value");
         }
+    }
+
+    private static Function<Option<Float>, ControllerBuilder<Float>> getFloatController(FloatOption floatOption) {
+        return switch (floatOption.controller) {
+            case Slider -> opt -> FloatSliderControllerBuilder.create(opt)
+                    .step(0.01f)
+                    .range(floatOption.minValue, floatOption.maxValue);
+            case Field -> opt -> FloatFieldControllerBuilder.create(opt)
+                    .range(floatOption.minValue, floatOption.maxValue);
+        };
     }
 }

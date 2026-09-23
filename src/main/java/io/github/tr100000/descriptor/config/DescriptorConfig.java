@@ -6,6 +6,7 @@ import com.mojang.serialization.JsonOps;
 import io.github.tr100000.descriptor.Descriptor;
 import io.github.tr100000.descriptor.config.option.GroupOption;
 import io.github.tr100000.descriptor.config.option.impl.BooleanOption;
+import io.github.tr100000.descriptor.config.option.impl.FloatOption;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.StrictJsonParser;
@@ -13,6 +14,7 @@ import org.jetbrains.annotations.ApiStatus;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class DescriptorConfig extends GroupOption<DescriptorConfig> {
@@ -23,9 +25,14 @@ public class DescriptorConfig extends GroupOption<DescriptorConfig> {
     public final BooleanOption modEnabled = add(new BooleanOption(true, "mod_enabled", configTranslated("mod_enabled")));
     public final MobEffectsSettings mobEffects = add(new MobEffectsSettings());
     public final MusicDiscsSettings musicDiscs = add(new MusicDiscsSettings());
+    public final PaintingsSettings paintings = add(new PaintingsSettings());
 
-    public static boolean check(Predicate<DescriptorConfig> predicate) {
+    public static boolean test(Predicate<DescriptorConfig> predicate) {
         return INSTANCE.modEnabled.getValue() && predicate.test(INSTANCE);
+    }
+
+    public static boolean check(Function<DescriptorConfig, BooleanOption> predicate) {
+        return INSTANCE.modEnabled.getValue() && predicate.apply(INSTANCE).getValue();
     }
 
     @Override
@@ -55,6 +62,16 @@ public class DescriptorConfig extends GroupOption<DescriptorConfig> {
         @Override
         public String getName() {
             return "music_discs";
+        }
+    }
+
+    public static class PaintingsSettings extends GroupOption<PaintingsSettings> {
+        public final BooleanOption showPreviewTooltip = add(new BooleanOption(true, "show_preview_tooltip", configTranslated("paintings.show_preview_tooltip")));
+        public final FloatOption previewTooltipScale = add(new FloatOption(1.0f, "preview_tooltip_scale", configTranslated("paintings.preview_tooltip_scale"), 0.01f, 5f, FloatOption.Controller.Slider));
+
+        @Override
+        public String getName() {
+            return "paintings";
         }
     }
 

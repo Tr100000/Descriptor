@@ -15,9 +15,12 @@ import java.util.function.Consumer;
 
 @Mixin(PotionContents.class)
 public abstract class PotionContentsMixin {
-    @Inject(method = "addPotionTooltip", at = @At(value = "INVOKE", target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V", ordinal = 0, shift = At.Shift.AFTER))
+    @Inject(
+            method = "addPotionTooltip",
+            at = @At(value = "INVOKE", target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V", ordinal = 0, shift = At.Shift.AFTER)
+    )
     private static void addPotionTooltip(Iterable<MobEffectInstance> effects, Consumer<Component> lines, float durationScale, float tickrate, CallbackInfo ci, @Local(name = "effect") MobEffectInstance effect) {
-        if (DescriptorConfig.check(c -> c.mobEffects.showItemTooltips.getValue())) {
+        if (DescriptorConfig.check(c -> c.mobEffects.showItemTooltips)) {
             lines.accept(DescriptorUtil.getMobEffectDescription(effect));
         }
     }

@@ -2,6 +2,7 @@ package io.github.tr100000.descriptor.mixin.mob_effects;
 
 import com.mojang.brigadier.Message;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
+import io.github.tr100000.descriptor.config.DescriptorConfig;
 import io.github.tr100000.descriptor.gui.MessageWithCustomTooltip;
 import io.github.tr100000.descriptor.gui.MobEffectDescriptionTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
@@ -31,9 +32,13 @@ public interface SharedSuggestionProviderMixin {
         throw new UnsupportedOperationException("Implemented via mixin");
     }
 
-    @Inject(method = "suggestRegistryElements(Lnet/minecraft/core/HolderLookup;Lnet/minecraft/commands/SharedSuggestionProvider$ElementSuggestionType;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/commands/SharedSuggestionProvider;suggestResource(Ljava/util/stream/Stream;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;"), cancellable = true)
+    @Inject(
+            method = "suggestRegistryElements(Lnet/minecraft/core/HolderLookup;Lnet/minecraft/commands/SharedSuggestionProvider$ElementSuggestionType;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)V",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/commands/SharedSuggestionProvider;suggestResource(Ljava/util/stream/Stream;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;"),
+            cancellable = true
+    )
     private void suggestRegistryElements(HolderLookup<?> registry, SharedSuggestionProvider.ElementSuggestionType elements, SuggestionsBuilder builder, CallbackInfo ci) {
-        if (registry == BuiltInRegistries.MOB_EFFECT) {
+        if (registry == BuiltInRegistries.MOB_EFFECT && DescriptorConfig.check(c -> c.mobEffects.showCommandCompletionTooltips)) {
             ci.cancel();
 
             Iterable<Identifier> values = registry.listElementIds().map(ResourceKey::identifier)::iterator;

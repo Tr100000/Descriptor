@@ -28,7 +28,7 @@ public abstract class EffectsInInventoryMixin {
         tooltipCache = new MobEffectTooltipFactory(new MobEffectTooltipSettings(showExtraDetails, showExtraDetails));
     }
 
-    @Inject(method = "extractEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blitSprite(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V", shift = At.Shift.AFTER))
+    @Inject(method = "extractEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blitSprite(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V", shift = At.Shift.AFTER))
     private void extractEffects(GuiGraphicsExtractor graphics, Collection<MobEffectInstance> activeEffects, int x0, int yStep, int mouseX, int mouseY, int maxWidth, CallbackInfo ci, @Local(name = "effect") MobEffectInstance effect, @Local(name = "textureWidth") int textureWidth, @Local(name = "y0") int y0) {
         if (!DescriptorConfig.check(c -> c.mobEffects.showEffectsInInventoryTooltips))
             return;

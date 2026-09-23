@@ -24,7 +24,7 @@ public abstract class SuggestionsListMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;setTooltipForNextFrame(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;II)V"),
             cancellable = true
     )
-    private void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, CallbackInfo ci, @Local Message tooltip) {
+    private void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, CallbackInfo ci, @Local(name = "tooltip") Message tooltip) {
         if (tooltip instanceof MessageWithCustomTooltip customTooltip) {
             ci.cancel();
 

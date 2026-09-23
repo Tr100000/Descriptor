@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 @Mixin(SharedSuggestionProvider.class)
 public interface SharedSuggestionProviderMixin {
@@ -33,11 +34,11 @@ public interface SharedSuggestionProviderMixin {
     }
 
     @Inject(
-            method = "suggestRegistryElements(Lnet/minecraft/core/HolderLookup;Lnet/minecraft/commands/SharedSuggestionProvider$ElementSuggestionType;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)V",
+            method = "suggestRegistryElements(Lnet/minecraft/core/HolderLookup;Lnet/minecraft/commands/SharedSuggestionProvider$ElementSuggestionType;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Ljava/util/function/Predicate;)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/commands/SharedSuggestionProvider;suggestResource(Ljava/util/stream/Stream;Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;)Ljava/util/concurrent/CompletableFuture;"),
             cancellable = true
     )
-    private void suggestRegistryElements(HolderLookup<?> registry, SharedSuggestionProvider.ElementSuggestionType elements, SuggestionsBuilder builder, CallbackInfo ci) {
+    private <E> void suggestRegistryElements(HolderLookup<E> registry, SharedSuggestionProvider.ElementSuggestionType elements, SuggestionsBuilder builder, Predicate<E> filter, CallbackInfo ci) {
         if (registry == BuiltInRegistries.MOB_EFFECT && DescriptorConfig.check(c -> c.mobEffects.showCommandCompletionTooltips)) {
             ci.cancel();
 
